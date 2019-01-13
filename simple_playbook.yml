@@ -1,7 +1,5 @@
 ---
 - hosts: hostname
-  become: yes
-  remote_user: root
   tasks:
     - name: Install Samba Service
       apt:
