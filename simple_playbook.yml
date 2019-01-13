@@ -1,11 +1,15 @@
 ---
-- hosts: host
+- hosts: hostname
   become_user: root
   tasks:
     - name: Install Samba Service
-      yum:
+      apt:
           name: samba
           state: latest
+      when:
+         - ansible_distribution == "Ubuntu"
+         - ansible_distribution_major_version == "16"
+         
     - name: Start Samba Service
       service:
           name: "{{ item }}"
@@ -13,4 +17,12 @@
       with_items:
           - 'smb'
           - 'nmb'
+    - name: Install Samba Service
+      yum:
+          name: samba
+          state: latest
+      when:
+         - ansible_distribution == "CentOs"
+         - ansible_distribution_major_version == "7"
+          
 ...
