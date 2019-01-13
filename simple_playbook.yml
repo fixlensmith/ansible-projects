@@ -10,16 +10,9 @@
       when:
          - ansible_distribution == "Ubuntu"
          - ansible_distribution_major_version == "16"
-         
-    - name: Start Samba Service
-      service:
-          name: "{{ item }}"
-          state: started
-      with_items:
-          - 'smb'
-          - 'nmb'
+
     - name: Install Samba Service
-      yum:
+        yum:
           name: samba
           state: latest
       when:
